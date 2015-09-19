@@ -19,9 +19,18 @@ $app->get('/usercars/:id', function ($id) use ($app) {
 	$userCarDto->printData($app);
 });
 
+$app->post('/usercars', function () use ($app) {
+	global $entityManager;
+	$userCarDto = new UserCarDto();
+	$userCarDto = $userCarDto->bindXml($app);
+	$entityManager->persist($userCarEntity);
+	$entityManager->flush();
+	$userCarDto = bindUserCarEntity($userCarEntity);
+	$userCarDto->printData($app);
+});
+
 $app->post('/usercars/list', function () use ($app) {
 	global $entityManager;
-	$returnUserCarListDto = new UserCarListDto();
 	$userCarListDto = new UserCarListDto();
 	$userCarListDto = $userCarListDto->bindXml($app);
 	$userCarsArray = array();
@@ -39,16 +48,6 @@ $app->post('/usercars/list', function () use ($app) {
 $app->put('/usercars/:id', function ($id) use ($app) {
 	global $entityManager;
 	$userCarEntity = $entityManager->find("UserCarEntity", $id);
-	$entityManager->flush();
-	$userCarDto = bindUserCarEntity($userCarEntity);
-	$userCarDto->printData($app);
-});
-
-$app->post('/usercars', function () use ($app) {
-	global $entityManager;
-	$userCarDto = new UserCarDto();
-	$userCarDto->bindJson($app);
-	$entityManager->persist($userCarEntity);
 	$entityManager->flush();
 	$userCarDto = bindUserCarEntity($userCarEntity);
 	$userCarDto->printData($app);

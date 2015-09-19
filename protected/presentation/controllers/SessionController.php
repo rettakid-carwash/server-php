@@ -19,9 +19,18 @@ $app->get('/sessions/:id', function ($id) use ($app) {
 	$sessionDto->printData($app);
 });
 
+$app->post('/sessions', function () use ($app) {
+	global $entityManager;
+	$sessionDto = new SessionDto();
+	$sessionDto = $sessionDto->bindXml($app);
+	$entityManager->persist($sessionEntity);
+	$entityManager->flush();
+	$sessionDto = bindSessionEntity($sessionEntity);
+	$sessionDto->printData($app);
+});
+
 $app->post('/sessions/list', function () use ($app) {
 	global $entityManager;
-	$returnSessionListDto = new SessionListDto();
 	$sessionListDto = new SessionListDto();
 	$sessionListDto = $sessionListDto->bindXml($app);
 	$sessionsArray = array();
@@ -39,16 +48,6 @@ $app->post('/sessions/list', function () use ($app) {
 $app->put('/sessions/:id', function ($id) use ($app) {
 	global $entityManager;
 	$sessionEntity = $entityManager->find("SessionEntity", $id);
-	$entityManager->flush();
-	$sessionDto = bindSessionEntity($sessionEntity);
-	$sessionDto->printData($app);
-});
-
-$app->post('/sessions', function () use ($app) {
-	global $entityManager;
-	$sessionDto = new SessionDto();
-	$sessionDto->bindJson($app);
-	$entityManager->persist($sessionEntity);
 	$entityManager->flush();
 	$sessionDto = bindSessionEntity($sessionEntity);
 	$sessionDto->printData($app);

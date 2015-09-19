@@ -19,9 +19,18 @@ $app->get('/icons/:id', function ($id) use ($app) {
 	$iconDto->printData($app);
 });
 
+$app->post('/icons', function () use ($app) {
+	global $entityManager;
+	$iconDto = new IconDto();
+	$iconDto = $iconDto->bindXml($app);
+	$entityManager->persist($iconEntity);
+	$entityManager->flush();
+	$iconDto = bindIconEntity($iconEntity);
+	$iconDto->printData($app);
+});
+
 $app->post('/icons/list', function () use ($app) {
 	global $entityManager;
-	$returnIconListDto = new IconListDto();
 	$iconListDto = new IconListDto();
 	$iconListDto = $iconListDto->bindXml($app);
 	$iconsArray = array();
@@ -39,16 +48,6 @@ $app->post('/icons/list', function () use ($app) {
 $app->put('/icons/:id', function ($id) use ($app) {
 	global $entityManager;
 	$iconEntity = $entityManager->find("IconEntity", $id);
-	$entityManager->flush();
-	$iconDto = bindIconEntity($iconEntity);
-	$iconDto->printData($app);
-});
-
-$app->post('/icons', function () use ($app) {
-	global $entityManager;
-	$iconDto = new IconDto();
-	$iconDto->bindJson($app);
-	$entityManager->persist($iconEntity);
 	$entityManager->flush();
 	$iconDto = bindIconEntity($iconEntity);
 	$iconDto->printData($app);

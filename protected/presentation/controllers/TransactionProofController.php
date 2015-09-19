@@ -19,9 +19,18 @@ $app->get('/transactionproofs/:id', function ($id) use ($app) {
 	$transactionProofDto->printData($app);
 });
 
+$app->post('/transactionproofs', function () use ($app) {
+	global $entityManager;
+	$transactionProofDto = new TransactionProofDto();
+	$transactionProofDto = $transactionProofDto->bindXml($app);
+	$entityManager->persist($transactionProofEntity);
+	$entityManager->flush();
+	$transactionProofDto = bindTransactionProofEntity($transactionProofEntity);
+	$transactionProofDto->printData($app);
+});
+
 $app->post('/transactionproofs/list', function () use ($app) {
 	global $entityManager;
-	$returnTransactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto = $transactionProofListDto->bindXml($app);
 	$transactionProofsArray = array();
@@ -39,16 +48,6 @@ $app->post('/transactionproofs/list', function () use ($app) {
 $app->put('/transactionproofs/:id', function ($id) use ($app) {
 	global $entityManager;
 	$transactionProofEntity = $entityManager->find("TransactionProofEntity", $id);
-	$entityManager->flush();
-	$transactionProofDto = bindTransactionProofEntity($transactionProofEntity);
-	$transactionProofDto->printData($app);
-});
-
-$app->post('/transactionproofs', function () use ($app) {
-	global $entityManager;
-	$transactionProofDto = new TransactionProofDto();
-	$transactionProofDto->bindJson($app);
-	$entityManager->persist($transactionProofEntity);
 	$entityManager->flush();
 	$transactionProofDto = bindTransactionProofEntity($transactionProofEntity);
 	$transactionProofDto->printData($app);

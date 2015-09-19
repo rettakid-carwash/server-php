@@ -19,9 +19,18 @@ $app->get('/devicestypes/:id', function ($id) use ($app) {
 	$devicesTypeDto->printData($app);
 });
 
+$app->post('/devicestypes', function () use ($app) {
+	global $entityManager;
+	$devicesTypeDto = new DevicesTypeDto();
+	$devicesTypeDto = $devicesTypeDto->bindXml($app);
+	$entityManager->persist($devicesTypeEntity);
+	$entityManager->flush();
+	$devicesTypeDto = bindDevicesTypeEntity($devicesTypeEntity);
+	$devicesTypeDto->printData($app);
+});
+
 $app->post('/devicestypes/list', function () use ($app) {
 	global $entityManager;
-	$returnDevicesTypeListDto = new DevicesTypeListDto();
 	$devicesTypeListDto = new DevicesTypeListDto();
 	$devicesTypeListDto = $devicesTypeListDto->bindXml($app);
 	$devicesTypesArray = array();
@@ -39,16 +48,6 @@ $app->post('/devicestypes/list', function () use ($app) {
 $app->put('/devicestypes/:id', function ($id) use ($app) {
 	global $entityManager;
 	$devicesTypeEntity = $entityManager->find("DevicesTypeEntity", $id);
-	$entityManager->flush();
-	$devicesTypeDto = bindDevicesTypeEntity($devicesTypeEntity);
-	$devicesTypeDto->printData($app);
-});
-
-$app->post('/devicestypes', function () use ($app) {
-	global $entityManager;
-	$devicesTypeDto = new DevicesTypeDto();
-	$devicesTypeDto->bindJson($app);
-	$entityManager->persist($devicesTypeEntity);
 	$entityManager->flush();
 	$devicesTypeDto = bindDevicesTypeEntity($devicesTypeEntity);
 	$devicesTypeDto->printData($app);

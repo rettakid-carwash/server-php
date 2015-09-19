@@ -19,9 +19,18 @@ $app->get('/loyaltyrewardss/:id', function ($id) use ($app) {
 	$loyaltyRewardsDto->printData($app);
 });
 
+$app->post('/loyaltyrewardss', function () use ($app) {
+	global $entityManager;
+	$loyaltyRewardsDto = new LoyaltyRewardsDto();
+	$loyaltyRewardsDto = $loyaltyRewardsDto->bindXml($app);
+	$entityManager->persist($loyaltyRewardsEntity);
+	$entityManager->flush();
+	$loyaltyRewardsDto = bindLoyaltyRewardsEntity($loyaltyRewardsEntity);
+	$loyaltyRewardsDto->printData($app);
+});
+
 $app->post('/loyaltyrewardss/list', function () use ($app) {
 	global $entityManager;
-	$returnLoyaltyRewardsListDto = new LoyaltyRewardsListDto();
 	$loyaltyRewardsListDto = new LoyaltyRewardsListDto();
 	$loyaltyRewardsListDto = $loyaltyRewardsListDto->bindXml($app);
 	$loyaltyRewardssArray = array();
@@ -39,16 +48,6 @@ $app->post('/loyaltyrewardss/list', function () use ($app) {
 $app->put('/loyaltyrewardss/:id', function ($id) use ($app) {
 	global $entityManager;
 	$loyaltyRewardsEntity = $entityManager->find("LoyaltyRewardsEntity", $id);
-	$entityManager->flush();
-	$loyaltyRewardsDto = bindLoyaltyRewardsEntity($loyaltyRewardsEntity);
-	$loyaltyRewardsDto->printData($app);
-});
-
-$app->post('/loyaltyrewardss', function () use ($app) {
-	global $entityManager;
-	$loyaltyRewardsDto = new LoyaltyRewardsDto();
-	$loyaltyRewardsDto->bindJson($app);
-	$entityManager->persist($loyaltyRewardsEntity);
 	$entityManager->flush();
 	$loyaltyRewardsDto = bindLoyaltyRewardsEntity($loyaltyRewardsEntity);
 	$loyaltyRewardsDto->printData($app);

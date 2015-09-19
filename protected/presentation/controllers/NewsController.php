@@ -19,9 +19,18 @@ $app->get('/newss/:id', function ($id) use ($app) {
 	$newsDto->printData($app);
 });
 
+$app->post('/newss', function () use ($app) {
+	global $entityManager;
+	$newsDto = new NewsDto();
+	$newsDto = $newsDto->bindXml($app);
+	$entityManager->persist($newsEntity);
+	$entityManager->flush();
+	$newsDto = bindNewsEntity($newsEntity);
+	$newsDto->printData($app);
+});
+
 $app->post('/newss/list', function () use ($app) {
 	global $entityManager;
-	$returnNewsListDto = new NewsListDto();
 	$newsListDto = new NewsListDto();
 	$newsListDto = $newsListDto->bindXml($app);
 	$newssArray = array();
@@ -39,16 +48,6 @@ $app->post('/newss/list', function () use ($app) {
 $app->put('/newss/:id', function ($id) use ($app) {
 	global $entityManager;
 	$newsEntity = $entityManager->find("NewsEntity", $id);
-	$entityManager->flush();
-	$newsDto = bindNewsEntity($newsEntity);
-	$newsDto->printData($app);
-});
-
-$app->post('/newss', function () use ($app) {
-	global $entityManager;
-	$newsDto = new NewsDto();
-	$newsDto->bindJson($app);
-	$entityManager->persist($newsEntity);
 	$entityManager->flush();
 	$newsDto = bindNewsEntity($newsEntity);
 	$newsDto->printData($app);

@@ -19,9 +19,18 @@ $app->get('/transactions/:id', function ($id) use ($app) {
 	$transactionDto->printData($app);
 });
 
+$app->post('/transactions', function () use ($app) {
+	global $entityManager;
+	$transactionDto = new TransactionDto();
+	$transactionDto = $transactionDto->bindXml($app);
+	$entityManager->persist($transactionEntity);
+	$entityManager->flush();
+	$transactionDto = bindTransactionEntity($transactionEntity);
+	$transactionDto->printData($app);
+});
+
 $app->post('/transactions/list', function () use ($app) {
 	global $entityManager;
-	$returnTransactionListDto = new TransactionListDto();
 	$transactionListDto = new TransactionListDto();
 	$transactionListDto = $transactionListDto->bindXml($app);
 	$transactionsArray = array();
@@ -39,16 +48,6 @@ $app->post('/transactions/list', function () use ($app) {
 $app->put('/transactions/:id', function ($id) use ($app) {
 	global $entityManager;
 	$transactionEntity = $entityManager->find("TransactionEntity", $id);
-	$entityManager->flush();
-	$transactionDto = bindTransactionEntity($transactionEntity);
-	$transactionDto->printData($app);
-});
-
-$app->post('/transactions', function () use ($app) {
-	global $entityManager;
-	$transactionDto = new TransactionDto();
-	$transactionDto->bindJson($app);
-	$entityManager->persist($transactionEntity);
 	$entityManager->flush();
 	$transactionDto = bindTransactionEntity($transactionEntity);
 	$transactionDto->printData($app);

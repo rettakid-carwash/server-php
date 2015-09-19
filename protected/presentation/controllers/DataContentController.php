@@ -19,9 +19,18 @@ $app->get('/datacontents/:id', function ($id) use ($app) {
 	$dataContentDto->printData($app);
 });
 
+$app->post('/datacontents', function () use ($app) {
+	global $entityManager;
+	$dataContentDto = new DataContentDto();
+	$dataContentDto = $dataContentDto->bindXml($app);
+	$entityManager->persist($dataContentEntity);
+	$entityManager->flush();
+	$dataContentDto = bindDataContentEntity($dataContentEntity);
+	$dataContentDto->printData($app);
+});
+
 $app->post('/datacontents/list', function () use ($app) {
 	global $entityManager;
-	$returnDataContentListDto = new DataContentListDto();
 	$dataContentListDto = new DataContentListDto();
 	$dataContentListDto = $dataContentListDto->bindXml($app);
 	$dataContentsArray = array();
@@ -39,16 +48,6 @@ $app->post('/datacontents/list', function () use ($app) {
 $app->put('/datacontents/:id', function ($id) use ($app) {
 	global $entityManager;
 	$dataContentEntity = $entityManager->find("DataContentEntity", $id);
-	$entityManager->flush();
-	$dataContentDto = bindDataContentEntity($dataContentEntity);
-	$dataContentDto->printData($app);
-});
-
-$app->post('/datacontents', function () use ($app) {
-	global $entityManager;
-	$dataContentDto = new DataContentDto();
-	$dataContentDto->bindJson($app);
-	$entityManager->persist($dataContentEntity);
 	$entityManager->flush();
 	$dataContentDto = bindDataContentEntity($dataContentEntity);
 	$dataContentDto->printData($app);

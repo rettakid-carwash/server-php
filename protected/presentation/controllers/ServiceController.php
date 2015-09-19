@@ -19,9 +19,18 @@ $app->get('/services/:id', function ($id) use ($app) {
 	$serviceDto->printData($app);
 });
 
+$app->post('/services', function () use ($app) {
+	global $entityManager;
+	$serviceDto = new ServiceDto();
+	$serviceDto = $serviceDto->bindXml($app);
+	$entityManager->persist($serviceEntity);
+	$entityManager->flush();
+	$serviceDto = bindServiceEntity($serviceEntity);
+	$serviceDto->printData($app);
+});
+
 $app->post('/services/list', function () use ($app) {
 	global $entityManager;
-	$returnServiceListDto = new ServiceListDto();
 	$serviceListDto = new ServiceListDto();
 	$serviceListDto = $serviceListDto->bindXml($app);
 	$servicesArray = array();
@@ -39,16 +48,6 @@ $app->post('/services/list', function () use ($app) {
 $app->put('/services/:id', function ($id) use ($app) {
 	global $entityManager;
 	$serviceEntity = $entityManager->find("ServiceEntity", $id);
-	$entityManager->flush();
-	$serviceDto = bindServiceEntity($serviceEntity);
-	$serviceDto->printData($app);
-});
-
-$app->post('/services', function () use ($app) {
-	global $entityManager;
-	$serviceDto = new ServiceDto();
-	$serviceDto->bindJson($app);
-	$entityManager->persist($serviceEntity);
 	$entityManager->flush();
 	$serviceDto = bindServiceEntity($serviceEntity);
 	$serviceDto->printData($app);

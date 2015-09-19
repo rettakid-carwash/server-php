@@ -19,6 +19,16 @@ $app->get('/users/:id', function ($id) use ($app) {
 	$userDto->printData($app);
 });
 
+$app->post('/users', function () use ($app) {
+	global $entityManager;
+	$userDto = new UserDto();
+	$userDto = $userDto->bindXml($app);
+	$entityManager->persist($userEntity);
+	$entityManager->flush();
+	$userDto = bindUserEntity($userEntity);
+	$userDto->printData($app);
+});
+
 $app->post('/users/list', function () use ($app) {
 	global $entityManager;
 	$userListDto = new UserListDto();
@@ -28,7 +38,7 @@ $app->post('/users/list', function () use ($app) {
 		$userEntity = bindUserDto($userDto);
 		$entityManager->persist($userEntity);
 		$entityManager->flush();
-		array_push($usersArray,bindUserEntity($userEntity));
+		array_push($usersArray,$userEntity);
 	}
 	$userListDto = new UserListDto();
 	$userListDto->setUsers($usersArray);
@@ -38,17 +48,6 @@ $app->post('/users/list', function () use ($app) {
 $app->put('/users/:id', function ($id) use ($app) {
 	global $entityManager;
 	$userEntity = $entityManager->find("UserEntity", $id);
-	$entityManager->flush();
-	$userDto = bindUserEntity($userEntity);
-	$userDto->printData($app);
-});
-
-$app->post('/users', function () use ($app) {
-	global $entityManager;
-	$userDto = new UserDto();
-	$userDto = $userDto->bindXml($app);
-	$userEntity = bindUserDto($userDto);
-	$entityManager->persist($userEntity);
 	$entityManager->flush();
 	$userDto = bindUserEntity($userEntity);
 	$userDto->printData($app);

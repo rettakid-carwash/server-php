@@ -19,9 +19,18 @@ $app->get('/sessionservices/:id', function ($id) use ($app) {
 	$sessionServiceDto->printData($app);
 });
 
+$app->post('/sessionservices', function () use ($app) {
+	global $entityManager;
+	$sessionServiceDto = new SessionServiceDto();
+	$sessionServiceDto = $sessionServiceDto->bindXml($app);
+	$entityManager->persist($sessionServiceEntity);
+	$entityManager->flush();
+	$sessionServiceDto = bindSessionServiceEntity($sessionServiceEntity);
+	$sessionServiceDto->printData($app);
+});
+
 $app->post('/sessionservices/list', function () use ($app) {
 	global $entityManager;
-	$returnSessionServiceListDto = new SessionServiceListDto();
 	$sessionServiceListDto = new SessionServiceListDto();
 	$sessionServiceListDto = $sessionServiceListDto->bindXml($app);
 	$sessionServicesArray = array();
@@ -39,16 +48,6 @@ $app->post('/sessionservices/list', function () use ($app) {
 $app->put('/sessionservices/:id', function ($id) use ($app) {
 	global $entityManager;
 	$sessionServiceEntity = $entityManager->find("SessionServiceEntity", $id);
-	$entityManager->flush();
-	$sessionServiceDto = bindSessionServiceEntity($sessionServiceEntity);
-	$sessionServiceDto->printData($app);
-});
-
-$app->post('/sessionservices', function () use ($app) {
-	global $entityManager;
-	$sessionServiceDto = new SessionServiceDto();
-	$sessionServiceDto->bindJson($app);
-	$entityManager->persist($sessionServiceEntity);
 	$entityManager->flush();
 	$sessionServiceDto = bindSessionServiceEntity($sessionServiceEntity);
 	$sessionServiceDto->printData($app);
