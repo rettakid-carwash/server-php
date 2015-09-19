@@ -1,0 +1,1 @@
+his video by Wayward Art Company demonstrates how to make a Cycles procedural wood texture and use it to create a customisable wood shader in Blender 2.75. Enjoy!
