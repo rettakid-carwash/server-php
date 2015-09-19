@@ -32,8 +32,8 @@ $app->post('/datacontents/list', function () use ($app) {
 		array_push($dataContentsArray,$dataContentEntity);
 	}
 	$dataContentListDto = new DataContentListDto();
-	$dataContentListDto.setDataContents($dataContentsArray)
-	$dataContentListDto.printData($app);
+	$dataContentListDto->setDataContents($dataContentsArray);
+	$dataContentListDto->printData($app);
 });
 
 $app->put('/datacontents/:id', function ($id) use ($app) {

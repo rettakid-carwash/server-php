@@ -32,8 +32,8 @@ $app->post('/services/list', function () use ($app) {
 		array_push($servicesArray,$serviceEntity);
 	}
 	$serviceListDto = new ServiceListDto();
-	$serviceListDto.setServices($servicesArray)
-	$serviceListDto.printData($app);
+	$serviceListDto->setServices($servicesArray);
+	$serviceListDto->printData($app);
 });
 
 $app->put('/services/:id', function ($id) use ($app) {

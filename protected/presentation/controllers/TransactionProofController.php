@@ -32,8 +32,8 @@ $app->post('/transactionproofs/list', function () use ($app) {
 		array_push($transactionProofsArray,$transactionProofEntity);
 	}
 	$transactionProofListDto = new TransactionProofListDto();
-	$transactionProofListDto.setTransactionProofs($transactionProofsArray)
-	$transactionProofListDto.printData($app);
+	$transactionProofListDto->setTransactionProofs($transactionProofsArray);
+	$transactionProofListDto->printData($app);
 });
 
 $app->put('/transactionproofs/:id', function ($id) use ($app) {

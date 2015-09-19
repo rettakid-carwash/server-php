@@ -32,8 +32,8 @@ $app->post('/transactionservices/list', function () use ($app) {
 		array_push($transactionServicesArray,$transactionServiceEntity);
 	}
 	$transactionServiceListDto = new TransactionServiceListDto();
-	$transactionServiceListDto.setTransactionServices($transactionServicesArray)
-	$transactionServiceListDto.printData($app);
+	$transactionServiceListDto->setTransactionServices($transactionServicesArray);
+	$transactionServiceListDto->printData($app);
 });
 
 $app->put('/transactionservices/:id', function ($id) use ($app) {

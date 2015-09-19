@@ -32,8 +32,8 @@ $app->post('/icons/list', function () use ($app) {
 		array_push($iconsArray,$iconEntity);
 	}
 	$iconListDto = new IconListDto();
-	$iconListDto.setIcons($iconsArray)
-	$iconListDto.printData($app);
+	$iconListDto->setIcons($iconsArray);
+	$iconListDto->printData($app);
 });
 
 $app->put('/icons/:id', function ($id) use ($app) {

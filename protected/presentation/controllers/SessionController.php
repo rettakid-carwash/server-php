@@ -32,8 +32,8 @@ $app->post('/sessions/list', function () use ($app) {
 		array_push($sessionsArray,$sessionEntity);
 	}
 	$sessionListDto = new SessionListDto();
-	$sessionListDto.setSessions($sessionsArray)
-	$sessionListDto.printData($app);
+	$sessionListDto->setSessions($sessionsArray);
+	$sessionListDto->printData($app);
 });
 
 $app->put('/sessions/:id', function ($id) use ($app) {

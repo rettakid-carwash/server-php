@@ -32,8 +32,8 @@ $app->post('/newss/list', function () use ($app) {
 		array_push($newssArray,$newsEntity);
 	}
 	$newsListDto = new NewsListDto();
-	$newsListDto.setNewss($newssArray)
-	$newsListDto.printData($app);
+	$newsListDto->setNewss($newssArray);
+	$newsListDto->printData($app);
 });
 
 $app->put('/newss/:id', function ($id) use ($app) {

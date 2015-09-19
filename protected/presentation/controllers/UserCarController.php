@@ -32,8 +32,8 @@ $app->post('/usercars/list', function () use ($app) {
 		array_push($userCarsArray,$userCarEntity);
 	}
 	$userCarListDto = new UserCarListDto();
-	$userCarListDto.setUserCars($userCarsArray)
-	$userCarListDto.printData($app);
+	$userCarListDto->setUserCars($userCarsArray);
+	$userCarListDto->printData($app);
 });
 
 $app->put('/usercars/:id', function ($id) use ($app) {

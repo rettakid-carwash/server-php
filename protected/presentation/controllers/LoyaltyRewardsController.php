@@ -32,8 +32,8 @@ $app->post('/loyaltyrewardss/list', function () use ($app) {
 		array_push($loyaltyRewardssArray,$loyaltyRewardsEntity);
 	}
 	$loyaltyRewardsListDto = new LoyaltyRewardsListDto();
-	$loyaltyRewardsListDto.setLoyaltyRewardss($loyaltyRewardssArray)
-	$loyaltyRewardsListDto.printData($app);
+	$loyaltyRewardsListDto->setLoyaltyRewardss($loyaltyRewardssArray);
+	$loyaltyRewardsListDto->printData($app);
 });
 
 $app->put('/loyaltyrewardss/:id', function ($id) use ($app) {

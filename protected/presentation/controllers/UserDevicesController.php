@@ -32,8 +32,8 @@ $app->post('/userdevicess/list', function () use ($app) {
 		array_push($userDevicessArray,$userDevicesEntity);
 	}
 	$userDevicesListDto = new UserDevicesListDto();
-	$userDevicesListDto.setUserDevicess($userDevicessArray)
-	$userDevicesListDto.printData($app);
+	$userDevicesListDto->setUserDevicess($userDevicessArray);
+	$userDevicesListDto->printData($app);
 });
 
 $app->put('/userdevicess/:id', function ($id) use ($app) {

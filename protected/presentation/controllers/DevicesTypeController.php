@@ -32,8 +32,8 @@ $app->post('/devicestypes/list', function () use ($app) {
 		array_push($devicesTypesArray,$devicesTypeEntity);
 	}
 	$devicesTypeListDto = new DevicesTypeListDto();
-	$devicesTypeListDto.setDevicesTypes($devicesTypesArray)
-	$devicesTypeListDto.printData($app);
+	$devicesTypeListDto->setDevicesTypes($devicesTypesArray);
+	$devicesTypeListDto->printData($app);
 });
 
 $app->put('/devicestypes/:id', function ($id) use ($app) {
