@@ -33,7 +33,7 @@ $app->post('/sessions/list', function () use ($app) {
 	}
 	$sessionListDto = new SessionListDto();
 	$sessionListDto.setSessions($sessionsArray)
-	$sessionListDto.printXml();
+	$sessionListDto.printData($app);
 });
 
 $app->put('/sessions/:id', function ($id) use ($app) {

@@ -33,7 +33,7 @@ $app->post('/userdevicess/list', function () use ($app) {
 	}
 	$userDevicesListDto = new UserDevicesListDto();
 	$userDevicesListDto.setUserDevicess($userDevicessArray)
-	$userDevicesListDto.printXml();
+	$userDevicesListDto.printData($app);
 });
 
 $app->put('/userdevicess/:id', function ($id) use ($app) {

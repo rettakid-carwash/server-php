@@ -33,7 +33,7 @@ $app->post('/usercars/list', function () use ($app) {
 	}
 	$userCarListDto = new UserCarListDto();
 	$userCarListDto.setUserCars($userCarsArray)
-	$userCarListDto.printXml();
+	$userCarListDto.printData($app);
 });
 
 $app->put('/usercars/:id', function ($id) use ($app) {

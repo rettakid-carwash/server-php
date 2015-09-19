@@ -33,7 +33,7 @@ $app->post('/users/list', function () use ($app) {
 	}
 	$userListDto = new UserListDto();
 	$userListDto.setUsers($usersArray)
-	$userListDto.printXml();
+	$userListDto.printData($app);
 });
 
 $app->put('/users/:id', function ($id) use ($app) {

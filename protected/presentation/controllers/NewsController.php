@@ -33,7 +33,7 @@ $app->post('/newss/list', function () use ($app) {
 	}
 	$newsListDto = new NewsListDto();
 	$newsListDto.setNewss($newssArray)
-	$newsListDto.printXml();
+	$newsListDto.printData($app);
 });
 
 $app->put('/newss/:id', function ($id) use ($app) {

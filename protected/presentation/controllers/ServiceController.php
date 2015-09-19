@@ -33,7 +33,7 @@ $app->post('/services/list', function () use ($app) {
 	}
 	$serviceListDto = new ServiceListDto();
 	$serviceListDto.setServices($servicesArray)
-	$serviceListDto.printXml();
+	$serviceListDto.printData($app);
 });
 
 $app->put('/services/:id', function ($id) use ($app) {

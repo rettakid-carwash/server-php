@@ -33,7 +33,7 @@ $app->post('/transactionservices/list', function () use ($app) {
 	}
 	$transactionServiceListDto = new TransactionServiceListDto();
 	$transactionServiceListDto.setTransactionServices($transactionServicesArray)
-	$transactionServiceListDto.printXml();
+	$transactionServiceListDto.printData($app);
 });
 
 $app->put('/transactionservices/:id', function ($id) use ($app) {

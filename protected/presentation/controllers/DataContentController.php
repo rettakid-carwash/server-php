@@ -33,7 +33,7 @@ $app->post('/datacontents/list', function () use ($app) {
 	}
 	$dataContentListDto = new DataContentListDto();
 	$dataContentListDto.setDataContents($dataContentsArray)
-	$dataContentListDto.printXml();
+	$dataContentListDto.printData($app);
 });
 
 $app->put('/datacontents/:id', function ($id) use ($app) {

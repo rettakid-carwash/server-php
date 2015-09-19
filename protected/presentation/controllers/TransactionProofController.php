@@ -33,7 +33,7 @@ $app->post('/transactionproofs/list', function () use ($app) {
 	}
 	$transactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto.setTransactionProofs($transactionProofsArray)
-	$transactionProofListDto.printXml();
+	$transactionProofListDto.printData($app);
 });
 
 $app->put('/transactionproofs/:id', function ($id) use ($app) {

@@ -33,7 +33,7 @@ $app->post('/icons/list', function () use ($app) {
 	}
 	$iconListDto = new IconListDto();
 	$iconListDto.setIcons($iconsArray)
-	$iconListDto.printXml();
+	$iconListDto.printData($app);
 });
 
 $app->put('/icons/:id', function ($id) use ($app) {
