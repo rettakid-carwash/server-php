@@ -72,6 +72,8 @@ class Dto {
 				} else if($obj->$getterName() instanceof Dto)	{
 					$className = new ReflectionClass($obj->$getterName());
 					$data = $this->bindXmlData($xml->$displayName,$className->getShortName(),$className->getMethods());
+				} else if($obj->$getterName() instanceof DateTime)	{
+					$data = DateTime::createFromFormat('Y-m-d H:i:s', $xml->$displayName);
 				} else {
 					$data = $xml->$displayName;
 				}
