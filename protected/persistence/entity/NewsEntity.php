@@ -1,6 +1,6 @@
 <?php
 
-/** @Entity @Table(name="pacs_news") **/
+/** @Entity @Table(name="PACS_NEWS") **/
 class NewsEntity 	{
 
     /** @Id @Column(name="NEWS_ID" , type="bigint" , length=15 , nullable=false) @GeneratedValue **/

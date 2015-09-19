@@ -1,7 +1,6 @@
 <?php
 
 require_once ($PROJ_PRESENTATION_DTO_ROOT.'ServiceDto.php');
-require_once ($PROJ_PRESENTATION_DTO_ROOT.'IconDto.php');
 
 function bindServiceDto($serviceDto)	{
 	if ($serviceDto != null)	{
@@ -11,7 +10,7 @@ function bindServiceDto($serviceDto)	{
         $serviceEntity->setServiceLoyaltyPoints($serviceDto->getServiceLoyaltyPoints());
         $serviceEntity->setServiceName($serviceDto->getServiceName());
         $serviceEntity->setServiceDescr($serviceDto->getServiceDescr());
-        $serviceEntity->setIcon($serviceDto->getIcon()->getIconId());
+        $serviceEntity->setIcon($serviceDto->getIcon());
         $serviceEntity->setEffFrom($serviceDto->getEffFrom());
         $serviceEntity->setEffTo($serviceDto->getEffTo());
         return $serviceEntity;

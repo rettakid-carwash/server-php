@@ -1,6 +1,6 @@
 <?php
 
-/** @Entity @Table(name="pacs_loyalty_rewards") **/
+/** @Entity @Table(name="PACS_LOYALTY_REWARDS") **/
 class LoyaltyRewardsEntity 	{
 
     /** @Id @Column(name="REWARDS_ID" , type="bigint" , length=15 , nullable=false) @GeneratedValue **/

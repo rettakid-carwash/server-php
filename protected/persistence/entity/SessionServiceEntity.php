@@ -1,6 +1,6 @@
 <?php
 
-/** @Entity @Table(name="pacs_session_service") **/
+/** @Entity @Table(name="PACS_SESSION_SERVICE") **/
 class SessionServiceEntity 	{
 
     /** @Id @Column(name="SESSION_SERVICE_ID" , type="bigint" , length=15 , nullable=false) @GeneratedValue **/

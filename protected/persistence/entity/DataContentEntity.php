@@ -1,6 +1,6 @@
 <?php
 
-/** @Entity @Table(name="pacs_data_content") **/
+/** @Entity @Table(name="PACS_DATA_CONTENT") **/
 class DataContentEntity 	{
 
     /** @Id @Column(name="DATA_CONTENT_ID" , type="bigint" , length=15 , nullable=false) @GeneratedValue **/

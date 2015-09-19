@@ -1,6 +1,6 @@
 <?php
 
-/** @Entity @Table(name="pacs_transaction_proof") **/
+/** @Entity @Table(name="PACS_TRANSACTION_PROOF") **/
 class TransactionProofEntity 	{
 
     /** @Id @Column(name="TRANSACTION_PROOF_ID" , type="bigint" , length=15 , nullable=false) @GeneratedValue **/

@@ -9,9 +9,9 @@ $config = Setup::createAnnotationMetadataConfiguration(array($PROJ_PERSISTANCE_E
 $conn = array(
     'driver'   => 'pdo_mysql',
     'host'     => '127.0.0.1',
-    'dbname'   => 'pacs',
+    'dbname'   => 'PACS',
     'user'     => 'root',
-    'password' => ''
+    'password' => 'asaneb17'
 );
 
 $entityManager = EntityManager::create($conn, $config);
