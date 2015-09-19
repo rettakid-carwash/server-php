@@ -23,6 +23,7 @@ $app->post('/datacontents', function () use ($app) {
 	global $entityManager;
 	$dataContentDto = new DataContentDto();
 	$dataContentDto = $dataContentDto->bindXml($app);
+	$dataContentEntity = bind$DataContentDto($dataContentDto);
 	$entityManager->persist($dataContentEntity);
 	$entityManager->flush();
 	$dataContentDto = bindDataContentEntity($dataContentEntity);

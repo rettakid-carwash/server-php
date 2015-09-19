@@ -23,6 +23,7 @@ $app->post('/sessionservices', function () use ($app) {
 	global $entityManager;
 	$sessionServiceDto = new SessionServiceDto();
 	$sessionServiceDto = $sessionServiceDto->bindXml($app);
+	$sessionServiceEntity = bind$SessionServiceDto($sessionServiceDto);
 	$entityManager->persist($sessionServiceEntity);
 	$entityManager->flush();
 	$sessionServiceDto = bindSessionServiceEntity($sessionServiceEntity);

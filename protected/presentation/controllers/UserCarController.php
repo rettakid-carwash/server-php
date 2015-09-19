@@ -23,6 +23,7 @@ $app->post('/usercars', function () use ($app) {
 	global $entityManager;
 	$userCarDto = new UserCarDto();
 	$userCarDto = $userCarDto->bindXml($app);
+	$userCarEntity = bind$UserCarDto($userCarDto);
 	$entityManager->persist($userCarEntity);
 	$entityManager->flush();
 	$userCarDto = bindUserCarEntity($userCarEntity);

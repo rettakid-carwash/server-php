@@ -23,6 +23,7 @@ $app->post('/transactionproofs', function () use ($app) {
 	global $entityManager;
 	$transactionProofDto = new TransactionProofDto();
 	$transactionProofDto = $transactionProofDto->bindXml($app);
+	$transactionProofEntity = bind$TransactionProofDto($transactionProofDto);
 	$entityManager->persist($transactionProofEntity);
 	$entityManager->flush();
 	$transactionProofDto = bindTransactionProofEntity($transactionProofEntity);

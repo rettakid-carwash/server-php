@@ -23,6 +23,7 @@ $app->post('/newss', function () use ($app) {
 	global $entityManager;
 	$newsDto = new NewsDto();
 	$newsDto = $newsDto->bindXml($app);
+	$newsEntity = bind$NewsDto($newsDto);
 	$entityManager->persist($newsEntity);
 	$entityManager->flush();
 	$newsDto = bindNewsEntity($newsEntity);

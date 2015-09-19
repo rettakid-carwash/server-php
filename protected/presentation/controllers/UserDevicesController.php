@@ -23,6 +23,7 @@ $app->post('/userdevicess', function () use ($app) {
 	global $entityManager;
 	$userDevicesDto = new UserDevicesDto();
 	$userDevicesDto = $userDevicesDto->bindXml($app);
+	$userDevicesEntity = bind$UserDevicesDto($userDevicesDto);
 	$entityManager->persist($userDevicesEntity);
 	$entityManager->flush();
 	$userDevicesDto = bindUserDevicesEntity($userDevicesEntity);

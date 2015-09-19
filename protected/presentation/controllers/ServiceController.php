@@ -23,6 +23,7 @@ $app->post('/services', function () use ($app) {
 	global $entityManager;
 	$serviceDto = new ServiceDto();
 	$serviceDto = $serviceDto->bindXml($app);
+	$serviceEntity = bind$ServiceDto($serviceDto);
 	$entityManager->persist($serviceEntity);
 	$entityManager->flush();
 	$serviceDto = bindServiceEntity($serviceEntity);

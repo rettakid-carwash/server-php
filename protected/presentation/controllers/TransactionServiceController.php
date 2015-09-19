@@ -23,6 +23,7 @@ $app->post('/transactionservices', function () use ($app) {
 	global $entityManager;
 	$transactionServiceDto = new TransactionServiceDto();
 	$transactionServiceDto = $transactionServiceDto->bindXml($app);
+	$transactionServiceEntity = bind$TransactionServiceDto($transactionServiceDto);
 	$entityManager->persist($transactionServiceEntity);
 	$entityManager->flush();
 	$transactionServiceDto = bindTransactionServiceEntity($transactionServiceEntity);
