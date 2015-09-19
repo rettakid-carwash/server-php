@@ -23,7 +23,7 @@ $app->post('/devicestypes', function () use ($app) {
 	global $entityManager;
 	$devicesTypeDto = new DevicesTypeDto();
 	$devicesTypeDto = $devicesTypeDto->bindXml($app);
-	$devicesTypeEntity = bind$DevicesTypeDto($devicesTypeDto);
+	$devicesTypeEntity = bindDevicesTypeDto($devicesTypeDto);
 	$entityManager->persist($devicesTypeEntity);
 	$entityManager->flush();
 	$devicesTypeDto = bindDevicesTypeEntity($devicesTypeEntity);

@@ -23,7 +23,7 @@ $app->post('/loyaltyrewardss', function () use ($app) {
 	global $entityManager;
 	$loyaltyRewardsDto = new LoyaltyRewardsDto();
 	$loyaltyRewardsDto = $loyaltyRewardsDto->bindXml($app);
-	$loyaltyRewardsEntity = bind$LoyaltyRewardsDto($loyaltyRewardsDto);
+	$loyaltyRewardsEntity = bindLoyaltyRewardsDto($loyaltyRewardsDto);
 	$entityManager->persist($loyaltyRewardsEntity);
 	$entityManager->flush();
 	$loyaltyRewardsDto = bindLoyaltyRewardsEntity($loyaltyRewardsEntity);

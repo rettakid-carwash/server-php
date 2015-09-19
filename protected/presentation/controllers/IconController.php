@@ -23,7 +23,7 @@ $app->post('/icons', function () use ($app) {
 	global $entityManager;
 	$iconDto = new IconDto();
 	$iconDto = $iconDto->bindXml($app);
-	$iconEntity = bind$IconDto($iconDto);
+	$iconEntity = bindIconDto($iconDto);
 	$entityManager->persist($iconEntity);
 	$entityManager->flush();
 	$iconDto = bindIconEntity($iconEntity);

@@ -23,7 +23,7 @@ $app->post('/users', function () use ($app) {
 	global $entityManager;
 	$userDto = new UserDto();
 	$userDto = $userDto->bindXml($app);
-	$userEntity = bind$UserDto($userDto);
+	$userEntity = bindUserDto($userDto);
 	$entityManager->persist($userEntity);
 	$entityManager->flush();
 	$userDto = bindUserEntity($userEntity);
