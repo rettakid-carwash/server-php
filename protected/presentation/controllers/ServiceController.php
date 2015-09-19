@@ -21,13 +21,19 @@ $app->get('/services/:id', function ($id) use ($app) {
 
 $app->post('/services/list', function () use ($app) {
 	global $entityManager;
+	$returnServiceListDto = new ServiceListDto();
 	$serviceListDto = new ServiceListDto();
 	$serviceListDto = $serviceListDto->bindXml($app);
+	$servicesArray = array();
 	foreach ($serviceListDto->getServices() as $serviceDto) {
 		$serviceEntity = bindServiceDto($serviceDto);
 		$entityManager->persist($serviceEntity);
 		$entityManager->flush();
+		array_push($servicesArray,$serviceEntity);
 	}
+	$serviceListDto = new ServiceListDto();
+	$serviceListDto.setServices($servicesArray)
+	$serviceListDto.printXml();
 });
 
 $app->put('/services/:id', function ($id) use ($app) {

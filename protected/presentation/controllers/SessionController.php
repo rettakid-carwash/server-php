@@ -21,13 +21,19 @@ $app->get('/sessions/:id', function ($id) use ($app) {
 
 $app->post('/sessions/list', function () use ($app) {
 	global $entityManager;
+	$returnSessionListDto = new SessionListDto();
 	$sessionListDto = new SessionListDto();
 	$sessionListDto = $sessionListDto->bindXml($app);
+	$sessionsArray = array();
 	foreach ($sessionListDto->getSessions() as $sessionDto) {
 		$sessionEntity = bindSessionDto($sessionDto);
 		$entityManager->persist($sessionEntity);
 		$entityManager->flush();
+		array_push($sessionsArray,$sessionEntity);
 	}
+	$sessionListDto = new SessionListDto();
+	$sessionListDto.setSessions($sessionsArray)
+	$sessionListDto.printXml();
 });
 
 $app->put('/sessions/:id', function ($id) use ($app) {

@@ -12,6 +12,8 @@ class LoyaltyRewardsDto extends Dto 	{
     private $effTo;
 
 	public function __construct()	{
+		$this->effFrom = new \DateTime("now");
+		$this->effTo = new \DateTime("now");
 	}
 
     public function getRewardsId()	{

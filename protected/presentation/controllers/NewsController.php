@@ -21,13 +21,19 @@ $app->get('/newss/:id', function ($id) use ($app) {
 
 $app->post('/newss/list', function () use ($app) {
 	global $entityManager;
+	$returnNewsListDto = new NewsListDto();
 	$newsListDto = new NewsListDto();
 	$newsListDto = $newsListDto->bindXml($app);
+	$newssArray = array();
 	foreach ($newsListDto->getNewss() as $newsDto) {
 		$newsEntity = bindNewsDto($newsDto);
 		$entityManager->persist($newsEntity);
 		$entityManager->flush();
+		array_push($newssArray,$newsEntity);
 	}
+	$newsListDto = new NewsListDto();
+	$newsListDto.setNewss($newssArray)
+	$newsListDto.printXml();
 });
 
 $app->put('/newss/:id', function ($id) use ($app) {

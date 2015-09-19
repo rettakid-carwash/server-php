@@ -21,13 +21,19 @@ $app->get('/transactionproofs/:id', function ($id) use ($app) {
 
 $app->post('/transactionproofs/list', function () use ($app) {
 	global $entityManager;
+	$returnTransactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto = $transactionProofListDto->bindXml($app);
+	$transactionProofsArray = array();
 	foreach ($transactionProofListDto->getTransactionProofs() as $transactionProofDto) {
 		$transactionProofEntity = bindTransactionProofDto($transactionProofDto);
 		$entityManager->persist($transactionProofEntity);
 		$entityManager->flush();
+		array_push($transactionProofsArray,$transactionProofEntity);
 	}
+	$transactionProofListDto = new TransactionProofListDto();
+	$transactionProofListDto.setTransactionProofs($transactionProofsArray)
+	$transactionProofListDto.printXml();
 });
 
 $app->put('/transactionproofs/:id', function ($id) use ($app) {

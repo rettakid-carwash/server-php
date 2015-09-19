@@ -21,13 +21,19 @@ $app->get('/usercars/:id', function ($id) use ($app) {
 
 $app->post('/usercars/list', function () use ($app) {
 	global $entityManager;
+	$returnUserCarListDto = new UserCarListDto();
 	$userCarListDto = new UserCarListDto();
 	$userCarListDto = $userCarListDto->bindXml($app);
+	$userCarsArray = array();
 	foreach ($userCarListDto->getUserCars() as $userCarDto) {
 		$userCarEntity = bindUserCarDto($userCarDto);
 		$entityManager->persist($userCarEntity);
 		$entityManager->flush();
+		array_push($userCarsArray,$userCarEntity);
 	}
+	$userCarListDto = new UserCarListDto();
+	$userCarListDto.setUserCars($userCarsArray)
+	$userCarListDto.printXml();
 });
 
 $app->put('/usercars/:id', function ($id) use ($app) {

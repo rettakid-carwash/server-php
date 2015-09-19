@@ -21,13 +21,19 @@ $app->get('/devicestypes/:id', function ($id) use ($app) {
 
 $app->post('/devicestypes/list', function () use ($app) {
 	global $entityManager;
+	$returnDevicesTypeListDto = new DevicesTypeListDto();
 	$devicesTypeListDto = new DevicesTypeListDto();
 	$devicesTypeListDto = $devicesTypeListDto->bindXml($app);
+	$devicesTypesArray = array();
 	foreach ($devicesTypeListDto->getDevicesTypes() as $devicesTypeDto) {
 		$devicesTypeEntity = bindDevicesTypeDto($devicesTypeDto);
 		$entityManager->persist($devicesTypeEntity);
 		$entityManager->flush();
+		array_push($devicesTypesArray,$devicesTypeEntity);
 	}
+	$devicesTypeListDto = new DevicesTypeListDto();
+	$devicesTypeListDto.setDevicesTypes($devicesTypesArray)
+	$devicesTypeListDto.printXml();
 });
 
 $app->put('/devicestypes/:id', function ($id) use ($app) {

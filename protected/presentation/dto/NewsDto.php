@@ -12,6 +12,7 @@ class NewsDto extends Dto 	{
 
 	public function __construct()	{
 		$this->dataContent = new DataContentDto();
+		$this->newsDate = new \DateTime("now");
 	}
 
     public function getNewsId()	{

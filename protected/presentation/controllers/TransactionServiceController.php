@@ -21,13 +21,19 @@ $app->get('/transactionservices/:id', function ($id) use ($app) {
 
 $app->post('/transactionservices/list', function () use ($app) {
 	global $entityManager;
+	$returnTransactionServiceListDto = new TransactionServiceListDto();
 	$transactionServiceListDto = new TransactionServiceListDto();
 	$transactionServiceListDto = $transactionServiceListDto->bindXml($app);
+	$transactionServicesArray = array();
 	foreach ($transactionServiceListDto->getTransactionServices() as $transactionServiceDto) {
 		$transactionServiceEntity = bindTransactionServiceDto($transactionServiceDto);
 		$entityManager->persist($transactionServiceEntity);
 		$entityManager->flush();
+		array_push($transactionServicesArray,$transactionServiceEntity);
 	}
+	$transactionServiceListDto = new TransactionServiceListDto();
+	$transactionServiceListDto.setTransactionServices($transactionServicesArray)
+	$transactionServiceListDto.printXml();
 });
 
 $app->put('/transactionservices/:id', function ($id) use ($app) {

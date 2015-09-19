@@ -13,6 +13,8 @@ class SessionDto extends Dto 	{
 
 	public function __construct()	{
 		$this->user = new UserDto();
+		$this->effFrom = new \DateTime("now");
+		$this->effTo = new \DateTime("now");
 	}
 
     public function getSessionId()	{

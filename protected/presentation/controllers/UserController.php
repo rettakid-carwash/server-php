@@ -21,13 +21,19 @@ $app->get('/users/:id', function ($id) use ($app) {
 
 $app->post('/users/list', function () use ($app) {
 	global $entityManager;
+	$returnUserListDto = new UserListDto();
 	$userListDto = new UserListDto();
 	$userListDto = $userListDto->bindXml($app);
+	$usersArray = array();
 	foreach ($userListDto->getUsers() as $userDto) {
 		$userEntity = bindUserDto($userDto);
 		$entityManager->persist($userEntity);
 		$entityManager->flush();
+		array_push($usersArray,$userEntity);
 	}
+	$userListDto = new UserListDto();
+	$userListDto.setUsers($usersArray)
+	$userListDto.printXml();
 });
 
 $app->put('/users/:id', function ($id) use ($app) {

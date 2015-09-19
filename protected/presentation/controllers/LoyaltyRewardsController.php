@@ -21,13 +21,19 @@ $app->get('/loyaltyrewardss/:id', function ($id) use ($app) {
 
 $app->post('/loyaltyrewardss/list', function () use ($app) {
 	global $entityManager;
+	$returnLoyaltyRewardsListDto = new LoyaltyRewardsListDto();
 	$loyaltyRewardsListDto = new LoyaltyRewardsListDto();
 	$loyaltyRewardsListDto = $loyaltyRewardsListDto->bindXml($app);
+	$loyaltyRewardssArray = array();
 	foreach ($loyaltyRewardsListDto->getLoyaltyRewardss() as $loyaltyRewardsDto) {
 		$loyaltyRewardsEntity = bindLoyaltyRewardsDto($loyaltyRewardsDto);
 		$entityManager->persist($loyaltyRewardsEntity);
 		$entityManager->flush();
+		array_push($loyaltyRewardssArray,$loyaltyRewardsEntity);
 	}
+	$loyaltyRewardsListDto = new LoyaltyRewardsListDto();
+	$loyaltyRewardsListDto.setLoyaltyRewardss($loyaltyRewardssArray)
+	$loyaltyRewardsListDto.printXml();
 });
 
 $app->put('/loyaltyrewardss/:id', function ($id) use ($app) {

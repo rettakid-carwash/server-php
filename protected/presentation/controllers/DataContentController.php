@@ -21,13 +21,19 @@ $app->get('/datacontents/:id', function ($id) use ($app) {
 
 $app->post('/datacontents/list', function () use ($app) {
 	global $entityManager;
+	$returnDataContentListDto = new DataContentListDto();
 	$dataContentListDto = new DataContentListDto();
 	$dataContentListDto = $dataContentListDto->bindXml($app);
+	$dataContentsArray = array();
 	foreach ($dataContentListDto->getDataContents() as $dataContentDto) {
 		$dataContentEntity = bindDataContentDto($dataContentDto);
 		$entityManager->persist($dataContentEntity);
 		$entityManager->flush();
+		array_push($dataContentsArray,$dataContentEntity);
 	}
+	$dataContentListDto = new DataContentListDto();
+	$dataContentListDto.setDataContents($dataContentsArray)
+	$dataContentListDto.printXml();
 });
 
 $app->put('/datacontents/:id', function ($id) use ($app) {

@@ -16,6 +16,7 @@ class TransactionDto extends Dto 	{
 	public function __construct()	{
 		$this->user = new UserDto();
 		$this->transactionProof = new TransactionProofDto();
+		$this->transactionDate = new \DateTime("now");
 	}
 
     public function getTransactionId()	{

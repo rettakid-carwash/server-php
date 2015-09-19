@@ -16,6 +16,8 @@ class ServiceDto extends Dto 	{
 
 	public function __construct()	{
 		$this->icon = new IconDto();
+		$this->effFrom = new \DateTime("now");
+		$this->effTo = new \DateTime("now");
 	}
 
     public function getServiceId()	{

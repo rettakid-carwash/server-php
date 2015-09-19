@@ -21,13 +21,19 @@ $app->get('/icons/:id', function ($id) use ($app) {
 
 $app->post('/icons/list', function () use ($app) {
 	global $entityManager;
+	$returnIconListDto = new IconListDto();
 	$iconListDto = new IconListDto();
 	$iconListDto = $iconListDto->bindXml($app);
+	$iconsArray = array();
 	foreach ($iconListDto->getIcons() as $iconDto) {
 		$iconEntity = bindIconDto($iconDto);
 		$entityManager->persist($iconEntity);
 		$entityManager->flush();
+		array_push($iconsArray,$iconEntity);
 	}
+	$iconListDto = new IconListDto();
+	$iconListDto.setIcons($iconsArray)
+	$iconListDto.printXml();
 });
 
 $app->put('/icons/:id', function ($id) use ($app) {
