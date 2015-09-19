@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'IconDto.php');
 
 function bindIconDto($iconDto)	{
 	if ($iconDto != null)	{
+	    global $entityManager;
 		$iconEntity = new IconEntity();
         $iconEntity->setIconId($iconDto->getIconId());
         $iconEntity->setIconName($iconDto->getIconName());

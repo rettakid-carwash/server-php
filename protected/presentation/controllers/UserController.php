@@ -13,7 +13,6 @@ $app->get('/users', function () use ($app) {
 
 $app->get('/users/:id', function ($id) use ($app) {
 	global $entityManager;
-	$userEntity = new UserEntity();
 	$userEntity = $entityManager->find("UserEntity", $id);
 	$userDto = bindUserEntity($userEntity);
 	$userDto->printData($app);

@@ -2,50 +2,6 @@
 
 class Dto {
 
-	public function printData($app)	{
-		if (true)	{
-			$this->printXml($app);
-		} else {
-			$this->printJson($app);
-		}
-	}
-
-	public function printXml($app)	{
-		$res = $app->response();
-		$res['Content-Type'] = 'text/xml';
-
-		$reflect = new \ReflectionClass($this);
-		$className = $reflect->getShortName();
-		$classVars = $reflect->getMethods();
-		$displayClassName = strtolower($className);
-
-		echo "<$displayClassName>";
-		foreach ($classVars as $classVar)	{
-			$methodName = $classVar->getName();
-			if (substr($methodName,0,3) == "get")	{
-				$displayName = substr($methodName,3,strlen($methodName) - 3);
-				$methodValue = $this->$methodName();
-				$displayName = strtolower($displayName);
-				if (is_array($methodValue)) {
-					echo "<$displayName>";
-					foreach ($methodValue as $item) {
-						$item->printXml($app);
-					}
-					echo "</$displayName>";
-				} elseif ($methodValue instanceof DateTime)	{
-					$displayMethodValue = $methodValue->format('Y-m-d H:i:s').'.9 SAST';
-					echo "<$displayName>$displayMethodValue</$displayName>";
-				} elseif ($methodValue instanceof Dto)	{
-					$methodValue->printXml($app);
-				}  else 	{
-					echo "<$displayName>$methodValue</$displayName>";
-				}
-			}
-			
-		}
-		echo "</$displayClassName>";
-	}
-
 	public function bindXml($app)	{
 		$body = $app->request()->getBody();
         $xml = simplexml_load_string($body);
@@ -71,16 +27,63 @@ class Dto {
 					}
 				} else if($obj->$getterName() instanceof Dto)	{
 					$className = new ReflectionClass($obj->$getterName());
+					$displayName = $displayName."dto";
 					$data = $this->bindXmlData($xml->$displayName,$className->getShortName(),$className->getMethods());
 				} else if($obj->$getterName() instanceof DateTime)	{
-					$data = DateTime::createFromFormat('Y-m-d H:i:s', $xml->$displayName);
+					$data = new DateTime($xml->$displayName);
 				} else {
-					$data = $xml->$displayName;
+					$data = (string)$xml->$displayName;
 				}
 				$obj->$methodName($data);
 			}
 		}
 		return $obj;
+	}
+
+	public function printData($app)	{
+		if (true)	{
+			$this->printXml($app);
+		} else {
+			$this->printJson($app);
+		}
+	}
+
+	public function printXml($app)	{
+		$res = $app->response();
+		$res['Content-Type'] = 'text/xml';
+
+		$reflect = new \ReflectionClass($this);
+		$className = $reflect->getShortName();
+		$classVars = $reflect->getMethods();
+		$displayClassName = strtolower($className);
+
+		echo "<$displayClassName>";
+		foreach ($classVars as $classVar)	{
+			$methodName = $classVar->getName();
+			if (substr($methodName,0,3) == "get")	{
+				$displayName = substr($methodName,3,strlen($methodName) - 3);
+				$methodValue = $this->$methodName();
+				$displayName = strtolower($displayName);
+				if ($methodValue == null)	{
+					echo "<$displayName>null</$displayName>";
+				} else if (is_array($methodValue)) {
+					echo "<$displayName>";
+					foreach ($methodValue as $item) {
+						$item->printXml($app);
+					}
+					echo "</$displayName>";
+				} elseif ($methodValue instanceof DateTime)	{
+					$displayMethodValue = $methodValue->format('Y-m-d H:i:s.0 T');
+					echo "<$displayName>$displayMethodValue</$displayName>";
+				} elseif ($methodValue instanceof Dto)	{
+					$methodValue->printXml($app);
+				}  else 	{
+					echo "<$displayName>$methodValue</$displayName>";
+				}
+			}
+			
+		}
+		echo "</$displayClassName>";
 	}
 
 	public function printJson($app)	{

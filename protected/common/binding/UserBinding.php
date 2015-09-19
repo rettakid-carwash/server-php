@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'UserDto.php');
 
 function bindUserDto($userDto)	{
 	if ($userDto != null)	{
+	    global $entityManager;
 		$userEntity = new UserEntity();
         $userEntity->setUserId($userDto->getUserId());
         $userEntity->setUserEmail($userDto->getUserEmail());

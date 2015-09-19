@@ -13,7 +13,6 @@ $app->get('/devicestypes', function () use ($app) {
 
 $app->get('/devicestypes/:id', function ($id) use ($app) {
 	global $entityManager;
-	$devicesTypeEntity = new DevicesTypeEntity();
 	$devicesTypeEntity = $entityManager->find("DevicesTypeEntity", $id);
 	$devicesTypeDto = bindDevicesTypeEntity($devicesTypeEntity);
 	$devicesTypeDto->printData($app);

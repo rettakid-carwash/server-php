@@ -13,7 +13,6 @@ $app->get('/icons', function () use ($app) {
 
 $app->get('/icons/:id', function ($id) use ($app) {
 	global $entityManager;
-	$iconEntity = new IconEntity();
 	$iconEntity = $entityManager->find("IconEntity", $id);
 	$iconDto = bindIconEntity($iconEntity);
 	$iconDto->printData($app);

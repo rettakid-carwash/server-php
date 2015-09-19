@@ -13,7 +13,6 @@ $app->get('/services', function () use ($app) {
 
 $app->get('/services/:id', function ($id) use ($app) {
 	global $entityManager;
-	$serviceEntity = new ServiceEntity();
 	$serviceEntity = $entityManager->find("ServiceEntity", $id);
 	$serviceDto = bindServiceEntity($serviceEntity);
 	$serviceDto->printData($app);
@@ -62,6 +61,13 @@ $app->delete('/services/:id', function ($id) use ($app) {
 });
 
 /*Referances*/
+
+$app->get('/services/:id/packageservices', function ($id) use ($app) {
+	global $entityManager;
+   	$packageServiceEntities = $entityManager->getRepository("PackageServiceEntity")->findBy(array('service'=>$id));
+    $packageService = bindPackageServiceEntityArray($packageServiceEntities);
+    $packageService->printData($app);
+});
 
 $app->get('/services/:id/transactionservices', function ($id) use ($app) {
 	global $entityManager;

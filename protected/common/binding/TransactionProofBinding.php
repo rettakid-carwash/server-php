@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'TransactionProofDto.php');
 
 function bindTransactionProofDto($transactionProofDto)	{
 	if ($transactionProofDto != null)	{
+	    global $entityManager;
 		$transactionProofEntity = new TransactionProofEntity();
         $transactionProofEntity->setTransactionProofId($transactionProofDto->getTransactionProofId());
         $transactionProofEntity->setTransactionProofUrl($transactionProofDto->getTransactionProofUrl());

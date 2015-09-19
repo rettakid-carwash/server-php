@@ -4,9 +4,10 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'SessionDto.php');
 
 function bindSessionDto($sessionDto)	{
 	if ($sessionDto != null)	{
+	    global $entityManager;
 		$sessionEntity = new SessionEntity();
         $sessionEntity->setSessionId($sessionDto->getSessionId());
-        $sessionEntity->setUser($sessionDto->getUser());
+        $sessionEntity->setUser($entityManager->find("UserEntity", $sessionDto->getUser()->getUserId()));
         $sessionEntity->setSessionLocation($sessionDto->getSessionLocation());
         $sessionEntity->setEffFrom($sessionDto->getEffFrom());
         $sessionEntity->setEffTo($sessionDto->getEffTo());

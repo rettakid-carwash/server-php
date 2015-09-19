@@ -13,7 +13,6 @@ $app->get('/transactionproofs', function () use ($app) {
 
 $app->get('/transactionproofs/:id', function ($id) use ($app) {
 	global $entityManager;
-	$transactionProofEntity = new TransactionProofEntity();
 	$transactionProofEntity = $entityManager->find("TransactionProofEntity", $id);
 	$transactionProofDto = bindTransactionProofEntity($transactionProofEntity);
 	$transactionProofDto->printData($app);

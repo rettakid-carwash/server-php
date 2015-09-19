@@ -13,7 +13,6 @@ $app->get('/transactions', function () use ($app) {
 
 $app->get('/transactions/:id', function ($id) use ($app) {
 	global $entityManager;
-	$transactionEntity = new TransactionEntity();
 	$transactionEntity = $entityManager->find("TransactionEntity", $id);
 	$transactionDto = bindTransactionEntity($transactionEntity);
 	$transactionDto->printData($app);

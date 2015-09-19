@@ -4,9 +4,10 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'UserCarDto.php');
 
 function bindUserCarDto($userCarDto)	{
 	if ($userCarDto != null)	{
+	    global $entityManager;
 		$userCarEntity = new UserCarEntity();
         $userCarEntity->setCarId($userCarDto->getCarId());
-        $userCarEntity->setUser($userCarDto->getUser());
+        $userCarEntity->setUser($entityManager->find("UserEntity", $userCarDto->getUser()->getUserId()));
         $userCarEntity->setCarName($userCarDto->getCarName());
         $userCarEntity->setCarNumPlate($userCarDto->getCarNumPlate());
         $userCarEntity->setCarMake($userCarDto->getCarMake());

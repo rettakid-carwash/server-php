@@ -4,12 +4,13 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'TransactionDto.php');
 
 function bindTransactionDto($transactionDto)	{
 	if ($transactionDto != null)	{
+	    global $entityManager;
 		$transactionEntity = new TransactionEntity();
         $transactionEntity->setTransactionId($transactionDto->getTransactionId());
         $transactionEntity->setTransactionTotal($transactionDto->getTransactionTotal());
-        $transactionEntity->setUser($transactionDto->getUser());
+        $transactionEntity->setUser($entityManager->find("UserEntity", $transactionDto->getUser()->getUserId()));
         $transactionEntity->setTransactionType($transactionDto->getTransactionType());
-        $transactionEntity->setTransactionProof($transactionDto->getTransactionProof());
+        $transactionEntity->setTransactionProof($entityManager->find("TransactionProofEntity", $transactionDto->getTransactionProof()->getTransactionProofId()));
         $transactionEntity->setTransactionDate($transactionDto->getTransactionDate());
         return $transactionEntity;
     }	else {

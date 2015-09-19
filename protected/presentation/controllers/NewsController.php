@@ -13,7 +13,6 @@ $app->get('/newss', function () use ($app) {
 
 $app->get('/newss/:id', function ($id) use ($app) {
 	global $entityManager;
-	$newsEntity = new NewsEntity();
 	$newsEntity = $entityManager->find("NewsEntity", $id);
 	$newsDto = bindNewsEntity($newsEntity);
 	$newsDto->printData($app);

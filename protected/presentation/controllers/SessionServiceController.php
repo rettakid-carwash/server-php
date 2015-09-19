@@ -13,7 +13,6 @@ $app->get('/sessionservices', function () use ($app) {
 
 $app->get('/sessionservices/:id', function ($id) use ($app) {
 	global $entityManager;
-	$sessionServiceEntity = new SessionServiceEntity();
 	$sessionServiceEntity = $entityManager->find("SessionServiceEntity", $id);
 	$sessionServiceDto = bindSessionServiceEntity($sessionServiceEntity);
 	$sessionServiceDto->printData($app);

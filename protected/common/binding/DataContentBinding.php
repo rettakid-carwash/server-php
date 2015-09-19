@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'DataContentDto.php');
 
 function bindDataContentDto($dataContentDto)	{
 	if ($dataContentDto != null)	{
+	    global $entityManager;
 		$dataContentEntity = new DataContentEntity();
         $dataContentEntity->setDataContentId($dataContentDto->getDataContentId());
         $dataContentEntity->setDataContentData($dataContentDto->getDataContentData());

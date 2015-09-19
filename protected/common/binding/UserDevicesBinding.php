@@ -4,10 +4,11 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'UserDevicesDto.php');
 
 function bindUserDevicesDto($userDevicesDto)	{
 	if ($userDevicesDto != null)	{
+	    global $entityManager;
 		$userDevicesEntity = new UserDevicesEntity();
         $userDevicesEntity->setUserDevicesId($userDevicesDto->getUserDevicesId());
-        $userDevicesEntity->setUser($userDevicesDto->getUser());
-        $userDevicesEntity->setDevicesType($userDevicesDto->getDevicesType());
+        $userDevicesEntity->setUser($entityManager->find("UserEntity", $userDevicesDto->getUser()->getUserId()));
+        $userDevicesEntity->setDevicesType($entityManager->find("DevicesTypeEntity", $userDevicesDto->getDevicesType()->getDevicesTypeId()));
         $userDevicesEntity->setDeviceName($userDevicesDto->getDeviceName());
         $userDevicesEntity->setDeviceId($userDevicesDto->getDeviceId());
         return $userDevicesEntity;

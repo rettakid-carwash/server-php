@@ -13,7 +13,6 @@ $app->get('/loyaltyrewardss', function () use ($app) {
 
 $app->get('/loyaltyrewardss/:id', function ($id) use ($app) {
 	global $entityManager;
-	$loyaltyRewardsEntity = new LoyaltyRewardsEntity();
 	$loyaltyRewardsEntity = $entityManager->find("LoyaltyRewardsEntity", $id);
 	$loyaltyRewardsDto = bindLoyaltyRewardsEntity($loyaltyRewardsEntity);
 	$loyaltyRewardsDto->printData($app);

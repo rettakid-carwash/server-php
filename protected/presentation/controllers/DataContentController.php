@@ -13,7 +13,6 @@ $app->get('/datacontents', function () use ($app) {
 
 $app->get('/datacontents/:id', function ($id) use ($app) {
 	global $entityManager;
-	$dataContentEntity = new DataContentEntity();
 	$dataContentEntity = $entityManager->find("DataContentEntity", $id);
 	$dataContentDto = bindDataContentEntity($dataContentEntity);
 	$dataContentDto->printData($app);

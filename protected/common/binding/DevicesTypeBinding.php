@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'DevicesTypeDto.php');
 
 function bindDevicesTypeDto($devicesTypeDto)	{
 	if ($devicesTypeDto != null)	{
+	    global $entityManager;
 		$devicesTypeEntity = new DevicesTypeEntity();
         $devicesTypeEntity->setDevicesTypeId($devicesTypeDto->getDevicesTypeId());
         $devicesTypeEntity->setDeviceTypeName($devicesTypeDto->getDeviceTypeName());

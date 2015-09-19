@@ -4,6 +4,7 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'LoyaltyRewardsDto.php');
 
 function bindLoyaltyRewardsDto($loyaltyRewardsDto)	{
 	if ($loyaltyRewardsDto != null)	{
+	    global $entityManager;
 		$loyaltyRewardsEntity = new LoyaltyRewardsEntity();
         $loyaltyRewardsEntity->setRewardsId($loyaltyRewardsDto->getRewardsId());
         $loyaltyRewardsEntity->setRewardsName($loyaltyRewardsDto->getRewardsName());

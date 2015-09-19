@@ -4,10 +4,11 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'SessionServiceDto.php');
 
 function bindSessionServiceDto($sessionServiceDto)	{
 	if ($sessionServiceDto != null)	{
+	    global $entityManager;
 		$sessionServiceEntity = new SessionServiceEntity();
         $sessionServiceEntity->setSessionServiceId($sessionServiceDto->getSessionServiceId());
-        $sessionServiceEntity->setSession($sessionServiceDto->getSession());
-        $sessionServiceEntity->setService($sessionServiceDto->getService());
+        $sessionServiceEntity->setSession($entityManager->find("SessionEntity", $sessionServiceDto->getSession()->getSessionId()));
+        $sessionServiceEntity->setService($entityManager->find("ServiceEntity", $sessionServiceDto->getService()->getServiceId()));
         return $sessionServiceEntity;
     }	else {
         return null;

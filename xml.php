@@ -14,6 +14,8 @@ require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'DataContentController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'IconController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'NewsController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'ServiceController.php');
+require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'PackageController.php');
+require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'PackageServiceController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'TransactionProofController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'TransactionController.php');
 require_once ($PROJ_PRESENTATION_CONTROLLER_ROOT.'TransactionServiceController.php');

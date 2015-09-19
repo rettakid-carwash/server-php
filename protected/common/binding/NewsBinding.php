@@ -4,10 +4,11 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'NewsDto.php');
 
 function bindNewsDto($newsDto)	{
 	if ($newsDto != null)	{
+	    global $entityManager;
 		$newsEntity = new NewsEntity();
         $newsEntity->setNewsId($newsDto->getNewsId());
         $newsEntity->setNewsHeading($newsDto->getNewsHeading());
-        $newsEntity->setDataContent($newsDto->getDataContent());
+        $newsEntity->setDataContent($entityManager->find("DataContentEntity", $newsDto->getDataContent()->getDataContentId()));
         $newsEntity->setNewsDate($newsDto->getNewsDate());
         return $newsEntity;
     }	else {

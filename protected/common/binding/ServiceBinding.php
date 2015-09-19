@@ -4,13 +4,14 @@ require_once ($PROJ_PRESENTATION_DTO_ROOT.'ServiceDto.php');
 
 function bindServiceDto($serviceDto)	{
 	if ($serviceDto != null)	{
+	    global $entityManager;
 		$serviceEntity = new ServiceEntity();
         $serviceEntity->setServiceId($serviceDto->getServiceId());
         $serviceEntity->setServiceAmount($serviceDto->getServiceAmount());
         $serviceEntity->setServiceLoyaltyPoints($serviceDto->getServiceLoyaltyPoints());
         $serviceEntity->setServiceName($serviceDto->getServiceName());
         $serviceEntity->setServiceDescr($serviceDto->getServiceDescr());
-        $serviceEntity->setIcon($serviceDto->getIcon());
+        $serviceEntity->setIcon($entityManager->find("IconEntity", $serviceDto->getIcon()->getIconId()));
         $serviceEntity->setEffFrom($serviceDto->getEffFrom());
         $serviceEntity->setEffTo($serviceDto->getEffTo());
         return $serviceEntity;

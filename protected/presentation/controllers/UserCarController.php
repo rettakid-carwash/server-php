@@ -13,7 +13,6 @@ $app->get('/usercars', function () use ($app) {
 
 $app->get('/usercars/:id', function ($id) use ($app) {
 	global $entityManager;
-	$userCarEntity = new UserCarEntity();
 	$userCarEntity = $entityManager->find("UserCarEntity", $id);
 	$userCarDto = bindUserCarEntity($userCarEntity);
 	$userCarDto->printData($app);
