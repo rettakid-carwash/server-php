@@ -11,7 +11,7 @@ $conn = array(
     'host'     => '127.0.0.1',
     'dbname'   => 'PACS',
     'user'     => 'root',
-    'password' => ''
+    'password' => 'asaneb17'
 );
 
 $entityManager = EntityManager::create($conn, $config);
