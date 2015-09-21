@@ -38,7 +38,7 @@ $app->post('/datacontents/list', function () use ($app) {
 		$dataContentEntity = bindDataContentDto($dataContentDto);
 		$entityManager->persist($dataContentEntity);
 		$entityManager->flush();
-		array_push($dataContentsArray,$dataContentEntity);
+		array_push($dataContentsArray,bindDataContentEntity($dataContentEntity));
 	}
 	$dataContentListDto = new DataContentListDto();
 	$dataContentListDto->setDataContents($dataContentsArray);

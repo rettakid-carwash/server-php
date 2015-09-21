@@ -38,7 +38,7 @@ $app->post('/usercars/list', function () use ($app) {
 		$userCarEntity = bindUserCarDto($userCarDto);
 		$entityManager->persist($userCarEntity);
 		$entityManager->flush();
-		array_push($userCarsArray,$userCarEntity);
+		array_push($userCarsArray,bindUserCarEntity($userCarEntity));
 	}
 	$userCarListDto = new UserCarListDto();
 	$userCarListDto->setUserCars($userCarsArray);

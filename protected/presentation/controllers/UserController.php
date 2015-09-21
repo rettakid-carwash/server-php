@@ -38,7 +38,7 @@ $app->post('/users/list', function () use ($app) {
 		$userEntity = bindUserDto($userDto);
 		$entityManager->persist($userEntity);
 		$entityManager->flush();
-		array_push($usersArray,$userEntity);
+		array_push($usersArray,bindUserEntity($userEntity));
 	}
 	$userListDto = new UserListDto();
 	$userListDto->setUsers($usersArray);
@@ -62,11 +62,11 @@ $app->delete('/users/:id', function ($id) use ($app) {
 
 /*Referances*/
 
-$app->get('/users/:id/userdevicess', function ($id) use ($app) {
+$app->get('/users/:id/userdevices', function ($id) use ($app) {
 	global $entityManager;
-   	$userDevicesEntities = $entityManager->getRepository("UserDevicesEntity")->findBy(array('user'=>$id));
-    $userDevices = bindUserDevicesEntityArray($userDevicesEntities);
-    $userDevices->printData($app);
+   	$userDeviceEntities = $entityManager->getRepository("UserDeviceEntity")->findBy(array('user'=>$id));
+    $userDevice = bindUserDeviceEntityArray($userDeviceEntities);
+    $userDevice->printData($app);
 });
 
 $app->get('/users/:id/usercars', function ($id) use ($app) {

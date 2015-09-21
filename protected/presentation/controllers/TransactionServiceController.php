@@ -38,7 +38,7 @@ $app->post('/transactionservices/list', function () use ($app) {
 		$transactionServiceEntity = bindTransactionServiceDto($transactionServiceDto);
 		$entityManager->persist($transactionServiceEntity);
 		$entityManager->flush();
-		array_push($transactionServicesArray,$transactionServiceEntity);
+		array_push($transactionServicesArray,bindTransactionServiceEntity($transactionServiceEntity));
 	}
 	$transactionServiceListDto = new TransactionServiceListDto();
 	$transactionServiceListDto->setTransactionServices($transactionServicesArray);

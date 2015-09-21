@@ -38,7 +38,7 @@ $app->post('/services/list', function () use ($app) {
 		$serviceEntity = bindServiceDto($serviceDto);
 		$entityManager->persist($serviceEntity);
 		$entityManager->flush();
-		array_push($servicesArray,$serviceEntity);
+		array_push($servicesArray,bindServiceEntity($serviceEntity));
 	}
 	$serviceListDto = new ServiceListDto();
 	$serviceListDto->setServices($servicesArray);
@@ -61,13 +61,6 @@ $app->delete('/services/:id', function ($id) use ($app) {
 });
 
 /*Referances*/
-
-$app->get('/services/:id/packageservices', function ($id) use ($app) {
-	global $entityManager;
-   	$packageServiceEntities = $entityManager->getRepository("PackageServiceEntity")->findBy(array('service'=>$id));
-    $packageService = bindPackageServiceEntityArray($packageServiceEntities);
-    $packageService->printData($app);
-});
 
 $app->get('/services/:id/transactionservices', function ($id) use ($app) {
 	global $entityManager;

@@ -38,7 +38,7 @@ $app->post('/transactionproofs/list', function () use ($app) {
 		$transactionProofEntity = bindTransactionProofDto($transactionProofDto);
 		$entityManager->persist($transactionProofEntity);
 		$entityManager->flush();
-		array_push($transactionProofsArray,$transactionProofEntity);
+		array_push($transactionProofsArray,bindTransactionProofEntity($transactionProofEntity));
 	}
 	$transactionProofListDto = new TransactionProofListDto();
 	$transactionProofListDto->setTransactionProofs($transactionProofsArray);

@@ -38,7 +38,7 @@ $app->post('/icons/list', function () use ($app) {
 		$iconEntity = bindIconDto($iconDto);
 		$entityManager->persist($iconEntity);
 		$entityManager->flush();
-		array_push($iconsArray,$iconEntity);
+		array_push($iconsArray,bindIconEntity($iconEntity));
 	}
 	$iconListDto = new IconListDto();
 	$iconListDto->setIcons($iconsArray);

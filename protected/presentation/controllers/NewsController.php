@@ -38,7 +38,7 @@ $app->post('/newss/list', function () use ($app) {
 		$newsEntity = bindNewsDto($newsDto);
 		$entityManager->persist($newsEntity);
 		$entityManager->flush();
-		array_push($newssArray,$newsEntity);
+		array_push($newssArray,bindNewsEntity($newsEntity));
 	}
 	$newsListDto = new NewsListDto();
 	$newsListDto->setNewss($newssArray);

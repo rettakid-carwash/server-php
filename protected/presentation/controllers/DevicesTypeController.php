@@ -38,7 +38,7 @@ $app->post('/devicestypes/list', function () use ($app) {
 		$devicesTypeEntity = bindDevicesTypeDto($devicesTypeDto);
 		$entityManager->persist($devicesTypeEntity);
 		$entityManager->flush();
-		array_push($devicesTypesArray,$devicesTypeEntity);
+		array_push($devicesTypesArray,bindDevicesTypeEntity($devicesTypeEntity));
 	}
 	$devicesTypeListDto = new DevicesTypeListDto();
 	$devicesTypeListDto->setDevicesTypes($devicesTypesArray);
@@ -62,11 +62,11 @@ $app->delete('/devicestypes/:id', function ($id) use ($app) {
 
 /*Referances*/
 
-$app->get('/devicestypes/:id/userdevicess', function ($id) use ($app) {
+$app->get('/devicestypes/:id/userdevices', function ($id) use ($app) {
 	global $entityManager;
-   	$userDevicesEntities = $entityManager->getRepository("UserDevicesEntity")->findBy(array('devicestype'=>$id));
-    $userDevices = bindUserDevicesEntityArray($userDevicesEntities);
-    $userDevices->printData($app);
+   	$userDeviceEntities = $entityManager->getRepository("UserDeviceEntity")->findBy(array('devicestype'=>$id));
+    $userDevice = bindUserDeviceEntityArray($userDeviceEntities);
+    $userDevice->printData($app);
 });
 
 ?>

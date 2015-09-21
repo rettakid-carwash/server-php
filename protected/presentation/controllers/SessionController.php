@@ -38,7 +38,7 @@ $app->post('/sessions/list', function () use ($app) {
 		$sessionEntity = bindSessionDto($sessionDto);
 		$entityManager->persist($sessionEntity);
 		$entityManager->flush();
-		array_push($sessionsArray,$sessionEntity);
+		array_push($sessionsArray,bindSessionEntity($sessionEntity));
 	}
 	$sessionListDto = new SessionListDto();
 	$sessionListDto->setSessions($sessionsArray);
